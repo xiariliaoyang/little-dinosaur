@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1C2E52" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>iDinosaur-i恐龙</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+</head>
+
+<body>
+    <div id="playerBox">
+        <div id="num">
+            <span class="num_text">0</span>
+        </div>
+        <div id="box1">
+        </div>
+        <div id="box2"></div>
+        <div class="mask">
+            <p>
+                Dinosaur
+            </p>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(function() {
+
+        $("body").click(function(){
+            $("#box1").addClass("jump");
+            setTimeout(function(){
+                $("#box1").removeClass("jump");
+            },800);
+        });
+
+        timecount();
+        function timecount() {
+            tt = setTimeout(function() {
+                var box1 = $("#box1").position();
+                var box2 = $("#box2").position();
+                if (box2.left <= 70 && box2.left >= -65 && box1.top >= 400) {
+                    console.log("碰撞了");
+                    clearTimeout();
+                } else {
+                    var newleft = box2.left - 5;
+                    $("#box2").css("left", newleft);
+                    console.log("过去了");
+
+                    timecount(tt);
+                };
+
+                if (box2.left == -100) {
+                    console.log("到底！");
+                    $(".num_text").text($(".num_text").text()*1+1);
+                    $("#box2").css("left","500px");
+                    //clearTimeout(tt);
+                };
+
+            }, 10);
+        }
+
+
+    })
+    </script>
+</body>
+
+</html>
